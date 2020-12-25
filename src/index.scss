@@ -2,19 +2,20 @@
   margin: 0;
   padding: 0;
   font-family: FreeMono, monospace;
-  font-size: 2vh;
+  font-size: 1vw;
 }
 
 .tables {
-  padding: 1vh;
+  padding: 1vw;
   width: 98vw;
   height: 40vh;
   display: flex;
+  // flex-direction: column;
   justify-content: space-evenly;
 }
 
 .filters {
-  padding: 1vh;
+  padding: 1vw;
   display: flex;
   justify-content: space-around;
 }
