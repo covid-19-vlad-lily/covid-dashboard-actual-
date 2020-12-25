@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "chart.js": "^2.9.4",
     "fast-async": "^6.3.8"
   }
 }
