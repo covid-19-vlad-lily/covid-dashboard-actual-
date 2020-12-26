@@ -2,12 +2,13 @@ $light-chookolate-color: #cab09e;
 $ocher-color: rgb(175, 121, 89);
 
 .wrapper-table-wrapper {
-  width: 31%;
+  width: 29%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 
-  .tbl-name-expnd-btn {
+  .tbl-name-expnd-btn,
+  .input-i-descr {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -15,11 +16,6 @@ $ocher-color: rgb(175, 121, 89);
     h1 {
       font-size: 1.7vw;
     }
-  }
-
-  .input-i-descr {
-    display: flex;
-    width: 100%;
   }
 }
 
@@ -67,20 +63,4 @@ td:last-child {
 
 .country-flag {
   height: 0.8vw;
-}
-
-.pick-country-btn,
-.expand-btn {
-  font-family: FreeMono, monospace;
-  padding: 0.3vw;
-  background-color: $ocher-color;
-  border: none;
-  outline: none;
-  color: white;
-}
-
-.pick-country-btn:hover,
-.expand-btn:hover {
-  cursor: pointer;
-  background-color: #cab09e;
 }

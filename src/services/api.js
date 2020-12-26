@@ -13,3 +13,10 @@ export function getGlobalData() {
     .then((data) => extractAxiosData(data))
     .then((globalData) => convertGlobalData(globalData));
 }
+
+export function getWorldDataForChart() {
+  return axios('https://disease.sh/v3/covid-19/historical/all?lastdays=300').then((data) =>
+    extractAxiosData(data)
+  );
+  // .then((globalData) => convertChartData(globalData));
+}
