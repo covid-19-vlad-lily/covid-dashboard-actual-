@@ -2,9 +2,14 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: path.join(__dirname, './src/index.js'),
+  mode: 'development',
+  entry: {
+    index: path.join(__dirname, './src/index.js'),
+    chart: path.join(__dirname, './src/components/chart/chartStatistic.js'),
+  },
   target: 'web',
   devtool: 'source-map',
   resolve: {
@@ -13,8 +18,8 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, './dist'),
-    filename: 'app.bundle.js',
-    publicPath: '/',
+    filename: '[name].bundle.js',
+    publicPath: './',
   },
   module: {
     rules: [
@@ -24,6 +29,14 @@ module.exports = {
         exclude: [/node_modules/],
       },
       { test: /\.(sc|sa|c)ss$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'] },
+      {
+        test: /\.svg$/,
+        loader: 'file-loader',
+      },
+      {
+        test: /\.geojson/,
+        loader: 'json-loader',
+      },
     ],
   },
   plugins: [
@@ -31,9 +44,12 @@ module.exports = {
       template: path.join(__dirname, './src/index.html'),
     }),
     new MiniCssExtractPlugin({ filename: 'index.css' }),
+    new CopyPlugin({
+      patterns: [{ from: './src/assets/virus.svg', to: './' }],
+    }),
   ],
   devServer: {
     contentBase: './src/public',
-    port: 3001,
+    port: 3002,
   },
 };

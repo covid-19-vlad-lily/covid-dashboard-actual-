@@ -1,3 +1,6 @@
+$ocher-color: rgb(175, 121, 89);
+$rs-logo: '//rsLogo.svg'; //?????????
+
 * {
   margin: 0;
   padding: 0;
@@ -5,17 +8,81 @@
   font-size: 1vw;
 }
 
-.tables {
-  padding: 1vw;
-  width: 98vw;
-  height: 40vh;
-  display: flex;
-  // flex-direction: column;
-  justify-content: space-evenly;
-}
-
 .filters {
   padding: 1vw;
   display: flex;
   justify-content: space-around;
+}
+
+.tables {
+  padding: 1vw;
+  width: 98vw;
+  height: 30vh;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.chart-data-map {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1.5vw;
+
+  // .chart-wrapper { //in table.scss
+  // width: 22vw;
+  // }
+
+  .statistic-data {
+    width: 20vw;
+    border: 1px solid black;
+  }
+
+  .map-statistic {
+    width: 50vw;
+    border: 1px solid black;
+  }
+}
+
+.pick-country-btn,
+.expand-btn,
+.recet-btn {
+  font-family: FreeMono, monospace;
+  padding: 0.3vw;
+  background-color: $ocher-color;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+.pick-country-btn:hover,
+.expand-btn:hover,
+.recet-btn:hover {
+  cursor: pointer;
+  background-color: #cab09e;
+}
+
+footer {
+  height: 2.5vw;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+
+  .footer-info {
+    display: flex;
+    padding-top: 1vw;
+    width: 80%;
+    height: 100%;
+    justify-content: space-between;
+
+    a,
+    span {
+      color: rgb(175, 121, 89);
+      align-items: center;
+      height: 2vw;
+    }
+
+    a:hover {
+      color: #b6683b;
+      font-weight: 600;
+    }
+  }
 }
