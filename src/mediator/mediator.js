@@ -43,10 +43,10 @@ class Mediator {
     this.filters.classList.add('filters');
     this.filters.append(amountDiv, measureDiv, markDiv, recetBtn);
 
-    const hr = document.createElement('hr');
     // --------tables
     this.tables = document.createElement('div');
     this.tables.classList.add('tables');
+
     // --------chart data map
     this.chartDataAndMap = document.createElement('div');
     this.chartDataAndMap.classList.add('chart-data-map');
@@ -69,6 +69,7 @@ class Mediator {
     this.mapStatistic.appendChild(expandBtn.cloneNode(true));
 
     this.chartDataAndMap.append(chartWrapper, this.statisticData, this.mapStatistic);
+
     // --------footer
     const footer = document.createElement('footer');
     const footerInfo = document.createElement('div');
@@ -94,15 +95,7 @@ class Mediator {
     footer.append(footerInfo);
 
     // ну наканецта
-    document.body.append(
-      this.filters,
-      hr,
-      this.tables,
-      hr.cloneNode(),
-      this.chartDataAndMap,
-      hr.cloneNode(),
-      footer
-    );
+    document.body.append(this.filters, this.tables, this.chartDataAndMap, footer);
   }
 
   loadData() {

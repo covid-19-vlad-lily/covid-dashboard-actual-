@@ -1,5 +1,6 @@
 $ocher-color: rgb(175, 121, 89);
 $rs-logo: '//rsLogo.svg'; //?????????
+$border-settings: 1px solid rgba(0, 0, 0, 0.39);
 
 * {
   margin: 0;
@@ -12,6 +13,7 @@ $rs-logo: '//rsLogo.svg'; //?????????
   padding: 1vw;
   display: flex;
   justify-content: space-around;
+  border-bottom: $border-settings;
 }
 
 .tables {
@@ -26,6 +28,8 @@ $rs-logo: '//rsLogo.svg'; //?????????
   display: flex;
   justify-content: space-evenly;
   padding: 1.5vw;
+  border-top: $border-settings;
+  border-bottom: $border-settings;
 
   // .chart-wrapper { //in table.scss
   // width: 22vw;
