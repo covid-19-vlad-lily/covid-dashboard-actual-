@@ -32,3 +32,9 @@ export function convertGlobalData(globalData) {
     globalRecoveredPerHundred: Math.trunc(globalData.recoveredPerOneMillion / 10),
   };
 }
+
+// export function convertChartData() {
+//   return {
+
+//   }
+// }

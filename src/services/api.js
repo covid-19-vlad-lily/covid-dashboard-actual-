@@ -4,12 +4,16 @@ import { extractAxiosData, convertGlobalCountriesData, convertGlobalData } from 
 
 export function getGlobalCountriesData() {
   return axios('https://corona.lmao.ninja/v2/countries')
-    .then((data) => extractAxiosData(data))
+    .then(extractAxiosData)
     .then((globalCountriesData) => convertGlobalCountriesData(globalCountriesData));
 }
 
 export function getGlobalData() {
   return axios('https://corona.lmao.ninja/v2/all')
-    .then((data) => extractAxiosData(data))
+    .then(extractAxiosData)
     .then((globalData) => convertGlobalData(globalData));
+}
+
+export function getWorldDataForChart() {
+  return axios('https://disease.sh/v3/covid-19/historical/all?lastdays=300').then(extractAxiosData);
 }
