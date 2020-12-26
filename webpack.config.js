@@ -2,7 +2,6 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -44,9 +43,6 @@ module.exports = {
       template: path.join(__dirname, './src/index.html'),
     }),
     new MiniCssExtractPlugin({ filename: 'index.css' }),
-    new CopyPlugin({
-      patterns: [{ from: './src/assets/virus.svg', to: './' }],
-    }),
   ],
   devServer: {
     contentBase: './src/public',
