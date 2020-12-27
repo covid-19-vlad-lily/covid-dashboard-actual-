@@ -16,6 +16,7 @@ export function convertGlobalCountriesData(globalCountriesData) {
     countryCasesPerHundred: Math.trunc(globalCountryData.casesPerOneMillion / 10),
     countryDeathsPerHundred: Math.trunc(globalCountryData.deathsPerOneMillion / 10),
     countryRecoveredPerHundred: Math.trunc(globalCountryData.recoveredPerOneMillion / 10),
+    population: globalCountryData.population,
   }));
 }
 
@@ -30,6 +31,7 @@ export function convertGlobalData(globalData) {
     globalCasesPerHundred: Math.trunc(globalData.casesPerOneMillion / 10),
     globalDeathsPerHundred: Math.trunc(globalData.deathsPerOneMillion / 10),
     globalRecoveredPerHundred: Math.trunc(globalData.recoveredPerOneMillion / 10),
+    population: globalData.population,
   };
 }
 

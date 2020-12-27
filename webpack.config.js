@@ -2,6 +2,7 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -29,8 +30,17 @@ module.exports = {
       },
       { test: /\.(sc|sa|c)ss$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'] },
       {
-        test: /\.svg$/,
-        loader: 'file-loader',
+        test: /\.(svg|png|gif)$/,
+        // test: /\.(png|svg|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'imgs/',
+            },
+          },
+        ],
       },
       {
         test: /\.geojson/,
@@ -43,6 +53,9 @@ module.exports = {
       template: path.join(__dirname, './src/index.html'),
     }),
     new MiniCssExtractPlugin({ filename: 'index.css' }),
+    new CopyPlugin({
+      patterns: [{ from: './src/assets/favicon.svg', to: './' }],
+    }),
   ],
   devServer: {
     contentBase: './src/public',

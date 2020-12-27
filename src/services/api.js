@@ -17,3 +17,9 @@ export function getGlobalData() {
 export function getWorldDataForChart() {
   return axios('https://disease.sh/v3/covid-19/historical/all?lastdays=300').then(extractAxiosData);
 }
+
+export function getCountryDataForChart(countryCode) {
+  return axios(`https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=300`).then(
+    extractAxiosData
+  );
+}
