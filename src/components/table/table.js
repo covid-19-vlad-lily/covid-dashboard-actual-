@@ -61,7 +61,7 @@ class Table {
       this.coefficient = 1 / 78000;
     }
 
-    tableName.textContent = `${mark} ${this.postfix}: ${Math.trunc(
+    tableName.textContent = `Global ${mark} ${this.postfix}: ${Math.trunc(
       this.coefficient * this.globalData[GLOBAL_MARK_DATA]
     )}`;
     expandBtn.textContent = 'Expand';

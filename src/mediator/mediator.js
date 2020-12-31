@@ -21,9 +21,19 @@ class Mediator {
 
   createPage() {
     // --------filtres
+    this.appWrapper = document.createElement('div');
+    this.appWrapper.classList.add('app-light-theme');
+
     const covid19 = document.createElement('h1');
-    covid19.textContent = 'COVID-19 DASHBOARD';
+    covid19.textContent = 'COVID-19 DASHBOARD ';
+
+    const darkThemeBtn = document.createElement('input');
+    darkThemeBtn.classList.add('dark-theme');
+    darkThemeBtn.type = 'checkbox';
     covid19.classList.add('covid-logo');
+
+    covid19.appendChild(darkThemeBtn);
+
     const amountDiv = document.createElement('div');
     amountDiv.textContent = 'Amount: ';
     this.amount = document.createElement('select');
@@ -66,21 +76,18 @@ class Mediator {
     const chartWrapper = document.createElement('div');
     const expandBtn = document.createElement('button');
     expandBtn.textContent = 'Expand';
-    chartWrapper.classList.add('chart-wrapper');
-    chartWrapper.classList.add('wrapper-expand');
+    chartWrapper.classList.add('chart-wrapper', 'wrapper-expand');
     expandBtn.classList.add('expand-btn');
 
     this.chartCanvas = document.createElement('canvas');
     chartWrapper.append(expandBtn, this.chartCanvas);
-    // data block
+    // data block 'last data update'
     this.statisticData = document.createElement('div');
-    this.statisticData.classList.add('statistic-data');
-    this.statisticData.classList.add('wrapper-expand');
+    this.statisticData.classList.add('statistic-data', 'wrapper-expand');
     this.statisticData.appendChild(expandBtn.cloneNode(true));
     // map block
     this.mapStatistic = document.createElement('div');
-    this.mapStatistic.classList.add('map-statistic');
-    this.mapStatistic.classList.add('wrapper-expand');
+    this.mapStatistic.classList.add('map-statistic', 'wrapper-expand');
     this.mapStatistic.appendChild(expandBtn.cloneNode(true));
 
     this.chartDataAndMap.append(chartWrapper, this.statisticData, this.mapStatistic);
@@ -112,10 +119,26 @@ class Mediator {
     footer.append(footerInfo);
 
     // ну наканецта
-    document.body.append(this.filters, this.tables, this.chartDataAndMap, footer);
+    this.appWrapper.append(this.filters, this.tables, this.chartDataAndMap, footer);
+    document.body.appendChild(this.appWrapper);
+
+    document.body.addEventListener('click', (event) => {
+      if (event.target.classList.contains('dark-theme')) {
+        this.appWrapper.classList.toggle('app-dark-theme');
+        document.body.classList.toggle('dark-scrollbar');
+      }
+    });
+
     document.body.addEventListener('click', (event) => {
       if (event.target.classList.contains('expand-btn')) {
         event.target.closest('.wrapper-expand').classList.toggle('expand');
+        if (!document.body.classList.contains('body-expand')) {
+          this.oldY = window.scrollY;
+          window.scrollTo(0, 0);
+        } else {
+          window.scrollTo(0, this.oldY || 0);
+        }
+        document.body.classList.toggle('body-expand');
       }
     });
   }
@@ -138,7 +161,7 @@ class Mediator {
     this.tables.appendChild(this.tableCases.createTables());
     this.chartStatistic = new ChartStatistic(this.chartCanvas, this.worldDataForChart);
     this.chartStatistic.drawChart();
-    this.statistic = new Statistic(this.globalData);
+    this.statistic = new Statistic(this.globalData, this.worldDataForChart);
     this.statisticData.appendChild(this.statistic.showInfo());
     this.listenFilters();
     this.listenCountries();
@@ -156,6 +179,7 @@ class Mediator {
     this.redrawChart();
     this.redrawInfo();
     this.redrawTables();
+    this.redrowMap();
   }
 
   changeMeasure(event) {

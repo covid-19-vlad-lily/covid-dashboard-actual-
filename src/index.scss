@@ -1,5 +1,77 @@
-$ocher-color: rgb(175, 121, 89);
-$border-settings: 1px solid rgba(0, 0, 0, 0.39);
+// .app-light-theme {
+$main-color: rgb(175, 121, 89);
+$contrast-color: #b6683b;
+$light-color: #cab09e;
+$border-color: rgba(0, 0, 0, 0.39);
+$border-settings: 1px solid $border-color;
+$page-color: white;
+$text-color: rgb(0, 0, 0);
+$btn-text-color: $page-color;
+$footer-text-color: rgb(175, 121, 89);
+
+// .app-dark-theme {
+$dark-main-color: rgb(119, 0, 0);
+$dark-contrast-color: rgb(90, 0, 0);
+$dark-page-color: rgb(48, 48, 48);
+$dark-text-color: rgba(255, 255, 255, 0.856);
+$dark-btn-text-color: $text-color;
+
+.app-light-theme {
+  background-color: $page-color;
+  color: $text-color;
+}
+
+.app-dark-theme {
+  height: 100vh;
+  background-color: $dark-page-color;
+  color: $dark-text-color;
+
+  .filters {
+    background-color: $dark-page-color;
+  }
+
+  input,
+  select {
+    background-color: $dark-page-color;
+    color: $dark-text-color;
+  }
+
+  h1.covid-logo,
+  .pick-country-btn,
+  .expand-btn,
+  .recet-btn {
+    background-color: $dark-main-color;
+  }
+
+  h1.covid-logo {
+    outline: 4px double $dark-main-color;
+  }
+
+  .pick-country-btn:hover,
+  .expand-btn:hover,
+  .recet-btn:hover {
+    background-color: $dark-contrast-color;
+  }
+
+  .footer-info {
+    a,
+    span {
+      color: $dark-text-color;
+    }
+  }
+
+  .expand.expand {
+    background-color: $dark-page-color;
+    color: $dark-text-color;
+    .filters {
+      .covid-logo {
+        input.dark-theme {
+          display: none !important;
+        }
+      }
+    }
+  }
+}
 
 * {
   margin: 0;
@@ -8,31 +80,75 @@ $border-settings: 1px solid rgba(0, 0, 0, 0.39);
   font-size: 1vw;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
 .filters {
-  padding: 1vw;
+  height: 7.5vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
   border-bottom: $border-settings;
 
   .covid-logo {
+    width: 20vw;
+    display: flex;
+    text-align: center;
     padding: 0.2vw;
+    padding-left: 0.6vw;
     font-size: 1.5vw;
-    background-color: $ocher-color;
-    color: white;
-    outline: 4px double rgba(124, 58, 3, 0.219);
+    background-color: $main-color;
+    color: $btn-text-color;
+    outline: 4px double $main-color;
+
+    .dark-theme {
+      outline: 0;
+      background-color: white;
+      border-radius: 1.2vw;
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: auto;
+      padding: 0.2vw;
+      height: 1.5vw;
+      width: 2.8vw;
+      transition: 0.1s 0.3s ease-out, box-shadow 0.1s 0.3s ease-out;
+      appearance: none;
+    }
+    .dark-theme:before,
+    .dark-theme:after {
+      content: '';
+      display: block;
+    }
+    .dark-theme:before {
+      background-color: $main-color; // color
+      border-radius: 50%;
+      width: 1.2vw;
+      height: 1.2vw;
+      transition: 0.1s 0.3s ease-out, transform 0.3s ease-out;
+    }
+
+    .dark-theme:checked {
+      background-color: rgb(61, 61, 61);
+    }
+
+    .dark-theme:checked:before {
+      background-color: rgba(114, 114, 114, 0.788);
+      transform: translateX(100%);
+    }
+
+    .dark-theme:checked:after {
+      transform: translateX(-2.5%);
+    }
   }
 }
 
-.tables {
-  padding: 1vw;
-  width: 98vw;
-  height: 30vh;
-  display: flex;
-  justify-content: space-evenly;
-}
-
 .chart-data-map {
+  height: 45vh;
   display: flex;
   justify-content: space-around;
   padding: 1.5vw;
@@ -45,7 +161,7 @@ $border-settings: 1px solid rgba(0, 0, 0, 0.39);
 
   .map-statistic {
     width: 50vw;
-    border: 1px solid black;
+    border: $border-settings;
   }
 }
 
@@ -54,41 +170,43 @@ $border-settings: 1px solid rgba(0, 0, 0, 0.39);
 .recet-btn {
   font-family: FreeMono, monospace;
   padding: 0.3vw;
-  background-color: $ocher-color;
+  background-color: $main-color;
   border: none;
   outline: none;
-  color: white;
+  color: $btn-text-color;
 }
 
 .pick-country-btn:hover,
 .expand-btn:hover,
 .recet-btn:hover {
   cursor: pointer;
-  background-color: #cab09e;
+  background-color: $light-color;
 }
 
 footer {
-  height: 2.5vw;
+  height: 5vh;
   width: 100vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 
   .footer-info {
+    padding-top: 2vw;
     display: flex;
-    padding-top: 1vw;
     width: 80%;
-    height: 100%;
     justify-content: space-between;
+    align-items: center;
 
     a,
     span {
-      color: rgb(175, 121, 89);
+      color: $footer-text-color;
       align-items: center;
       height: 2vw;
     }
 
     a:hover {
-      color: #b6683b;
+      color: $contrast-color;
       font-weight: 600;
     }
 
@@ -98,35 +216,143 @@ footer {
   }
 }
 
-.expand {
-  background-color: white;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw !important;
-  z-index: 5;
-  justify-content: center;
-  align-items: center;
-
-  .tbl-name-expnd-btn,
-  .input-i-descr {
-    width: 30%;
-    padding: 1vw;
-  }
-
-  .table-wrapper {
-    width: 90%;
-    height: 90%;
+.tables {
+  .expand {
+    background-color: $page-color;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 999;
     justify-content: center;
     align-items: center;
 
-    .table {
-      width: 100%;
-      height: 100%;
+    .tbl-name-expnd-btn,
+    .input-i-descr {
+      width: 30%;
+      padding: 1vw;
     }
-    tr {
-      height: 4vw;
+
+    .table-wrapper {
+      width: 90%;
+      height: 90%;
+      justify-content: center;
+      align-items: center;
+
+      .table {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  * {
+    font-size: 2vw;
+  }
+
+  body,
+  .app-dark-theme {
+    height: 100%;
+  }
+
+  body::-webkit-scrollbar {
+    width: 1vw;
+    background-color: $light-color;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background-color: $contrast-color;
+  }
+
+  body.dark-scrollbar::-webkit-scrollbar-thumb {
+    background-color: $dark-contrast-color;
+  }
+
+  .filters {
+    position: sticky;
+    top: 0;
+    height: 17vw;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: $page-color;
+
+    .covid-logo {
+      padding: 0.5vw;
+      padding-left: 34%;
+      width: 90%;
+      font-size: 3vw;
+      text-align: center;
+
+      .dark-theme {
+        margin-right: 1vw;
+        border-radius: 2.4vw;
+        padding: 0.4vw;
+        height: 3vw;
+        width: 5.5vw;
+      }
+      .dark-theme:before {
+        width: 2.4vw;
+        height: 2.4vw;
+      }
+    }
+
+    .recet-btn {
+      width: 35%;
+    }
+  }
+
+  .chart-data-map {
+    height: 90vh;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .statistic-data {
+      width: 30%;
+
+      .country-info-flag {
+        height: 16.5vw;
+        width: 28vw;
+      }
+    }
+
+    .map-statistic {
+      width: 90%;
+      height: 50%;
+      border: $border-settings;
+    }
+  }
+
+  .pick-country-btn,
+  .expand-btn,
+  .recet-btn {
+    padding: 0.7vw;
+  }
+
+  .pick-country-btn {
+    width: 100%;
+    height: 100%;
+  }
+
+  footer {
+    width: 98vw;
+    height: 5vw;
+    justify-content: center;
+    align-self: center;
+    padding-bottom: 1.5vh;
+
+    .footer-info {
+      a,
+      span {
+        font-size: 2.5vw;
+      }
+
+      .rs-logo {
+        height: 3.5vw;
+      }
     }
   }
 }
