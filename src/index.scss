@@ -1,20 +1,4 @@
-// .app-light-theme {
-$main-color: rgb(175, 121, 89);
-$contrast-color: #b6683b;
-$light-color: #cab09e;
-$border-color: rgba(0, 0, 0, 0.39);
-$border-settings: 1px solid $border-color;
-$page-color: white;
-$text-color: rgb(0, 0, 0);
-$btn-text-color: $page-color;
-$footer-text-color: rgb(175, 121, 89);
-
-// .app-dark-theme {
-$dark-main-color: rgb(119, 0, 0);
-$dark-contrast-color: rgb(90, 0, 0);
-$dark-page-color: rgb(48, 48, 48);
-$dark-text-color: rgba(255, 255, 255, 0.856);
-$dark-btn-text-color: $text-color;
+@import 'styleConstants';
 
 .app-light-theme {
   background-color: $page-color;

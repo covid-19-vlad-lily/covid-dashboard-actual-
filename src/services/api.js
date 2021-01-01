@@ -1,25 +1,29 @@
 import axios from 'axios';
+import {
+  GLOBAL_COUNTRIES_DATA,
+  GLOBAL_DATA,
+  WORLD_DATA_FOR_CHART,
+  COUNTRY_DATA_FOR_CHART,
+} from '../constants/url.constants';
 
 import { extractAxiosData, convertGlobalCountriesData, convertGlobalData } from '../utils';
 
 export function getGlobalCountriesData() {
-  return axios('https://corona.lmao.ninja/v2/countries')
+  return axios(GLOBAL_COUNTRIES_DATA)
     .then(extractAxiosData)
     .then((globalCountriesData) => convertGlobalCountriesData(globalCountriesData));
 }
 
 export function getGlobalData() {
-  return axios('https://corona.lmao.ninja/v2/all')
+  return axios(GLOBAL_DATA)
     .then(extractAxiosData)
     .then((globalData) => convertGlobalData(globalData));
 }
 
 export function getWorldDataForChart() {
-  return axios('https://disease.sh/v3/covid-19/historical/all?lastdays=300').then(extractAxiosData);
+  return axios(WORLD_DATA_FOR_CHART).then(extractAxiosData);
 }
 
 export function getCountryDataForChart(countryCode) {
-  return axios(`https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=300`).then(
-    extractAxiosData
-  );
+  return axios(`${COUNTRY_DATA_FOR_CHART}${countryCode}?lastdays=300`).then(extractAxiosData);
 }

@@ -4,6 +4,7 @@ import {
   getWorldDataForChart,
   getCountryDataForChart,
 } from '../services/api';
+import { LILY_GIT, VLAD_GIT, RS_LINK } from '../constants/footer.constants';
 import Table from '../components/table';
 import ChartStatistic from '../components/chart';
 import Statistic from '../components/statistic';
@@ -108,12 +109,12 @@ class Mediator {
     // rsLogo.src = 'somewhere with Jesus'; //I don't know, or I'm crazy or I need to sleep more
 
     rsLink.appendChild(rsLogo);
-    vladGitLink.href = 'https://github.com/VladislavLuksha';
+    vladGitLink.href = LILY_GIT;
     vladGitLink.textContent = 'VladislavLuksha';
-    lilyGitLink.href = 'https://github.com/lilianna040';
+    lilyGitLink.href = VLAD_GIT;
     lilyGitLink.textContent = 'lilianna040';
     year.textContent = '2020';
-    rsLink.href = 'https://rs.school/js/';
+    rsLink.href = RS_LINK;
 
     footerInfo.append(vladGitLink, lilyGitLink, year, rsLink);
     footer.append(footerInfo);
@@ -142,8 +143,6 @@ class Mediator {
       }
     });
   }
-
-  // document.body.addEventListener('click')
 
   loadData() {
     Promise.all([getGlobalCountriesData(), getGlobalData(), getWorldDataForChart()]).then(
@@ -179,7 +178,7 @@ class Mediator {
     this.redrawChart();
     this.redrawInfo();
     this.redrawTables();
-    this.redrowMap();
+    // this.redrowMap();
   }
 
   changeMeasure(event) {
