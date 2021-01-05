@@ -1,3 +1,9 @@
 .chart-wrapper {
   width: 22vw;
 }
+
+@media (max-width: 768px) {
+  .chart-wrapper {
+    width: 40vw;
+  }
+}

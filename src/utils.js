@@ -34,9 +34,3 @@ export function convertGlobalData(globalData) {
     population: globalData.population,
   };
 }
-
-// export function convertChartData() {
-//   return {
-
-//   }
-// }

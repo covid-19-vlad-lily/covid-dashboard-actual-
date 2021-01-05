@@ -1,4 +1,4 @@
-// import 'map.scss';
-import Map from './map';
+import './map.scss';
+// import Map from './map';
 
-export default Map;
+// export default Map;

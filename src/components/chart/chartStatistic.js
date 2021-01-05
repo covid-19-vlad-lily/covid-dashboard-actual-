@@ -1,38 +1,6 @@
 import Chart from 'chart.js';
-
-const chartConfig = {
-  type: 'bar',
-  data: {
-    labels: [],
-    datasets: [],
-  },
-  options: {
-    responsive: true,
-    devicePixelRatio: 2,
-    maintainAspectRatio: true,
-    animation: {
-      duration: 0,
-    },
-    tooltips: {
-      intersect: false,
-    },
-    scales: {
-      xAxes: [
-        {
-          type: 'time',
-          distribution: 'series',
-        },
-      ],
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
-    },
-  },
-};
+import chartConfig from './chartConfig';
+import { getFilters, changeChartConfig, changeAmountAndMeasure } from './helpFunctions';
 
 class ChartStatistic {
   constructor(canvas, worldDataForChart) {
@@ -48,37 +16,16 @@ class ChartStatistic {
     measureValue = 'absolute',
     markValue = 'cases'
   ) {
-    let markCases = markValue.toLowerCase();
-    if (markValue.toLowerCase() === 'confirmed') {
-      markCases = 'cases';
-    }
+    const markCases = getFilters(markValue);
 
-    let chartLabel = 'Global statistic';
-    let commonData = this.worldDataForChart[markCases];
-    let color = '#296d15be';
-    if (countryCode !== 'world') {
-      commonData = this.countryDataForChart.timeline[markCases];
-      chartLabel = `${this.countryDataForChart.country} statistic`;
-      color = 'red';
-    }
+    const { commonData, chartLabel, color } = changeChartConfig(
+      this.worldDataForChart,
+      this.countryDataForChart,
+      markCases,
+      countryCode
+    );
 
-    let reduced = Object.values(commonData);
-    if (amountValue === 'new') {
-      reduced = Object.values(commonData).reduce((acc, cur, i) => {
-        let pushToAcc = cur - Object.values(commonData)[i - 1] || 0;
-        if (pushToAcc < 0) pushToAcc = 0;
-        acc.push(pushToAcc);
-        return acc;
-      }, []);
-    }
-
-    if (measureValue === 'per-one-hundred') {
-      reduced = reduced.reduce((acc, cur) => {
-        const pushToAcc = (cur / this.population) * 100000;
-        acc.push(pushToAcc);
-        return acc;
-      }, []);
-    }
+    const reduced = changeAmountAndMeasure(commonData, this, amountValue, measureValue);
 
     this.chart = new Chart(this.canvas, chartConfig);
 

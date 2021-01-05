@@ -1,0 +1,10 @@
+.map-wrapper {
+  z-index: 0 !important;
+  height: 40vh;
+  position: static !important;
+  width: 30vw;
+}
+
+.leaflet-pane {
+  position: static !important;
+}

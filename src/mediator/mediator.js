@@ -8,7 +8,7 @@ import { LILY_GIT, VLAD_GIT, RS_LINK } from '../constants/footer.constants';
 import Table from '../components/table';
 import ChartStatistic from '../components/chart';
 import Statistic from '../components/statistic';
-// import Map from '../components/map';
+import Map from '../components/map';
 import RsLogo from '../assets/rsLogo.svg';
 
 class Mediator {
@@ -140,6 +140,9 @@ class Mediator {
           window.scrollTo(0, this.oldY || 0);
         }
         document.body.classList.toggle('body-expand');
+
+        // event.target.closest('.wrapper-expand').style.background = 'white'; // попробуй закомментировать эту линию
+        // event.target.closest('.wrapper-expand').requestFullscreen();
       }
     });
   }
@@ -162,6 +165,8 @@ class Mediator {
     this.chartStatistic.drawChart();
     this.statistic = new Statistic(this.globalData, this.worldDataForChart);
     this.statisticData.appendChild(this.statistic.showInfo());
+    // this.map = new Map();
+    // this.mapStatistic.appendChild(this.map.showMap());
     this.listenFilters();
     this.listenCountries();
   }

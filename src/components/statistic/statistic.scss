@@ -1,21 +1,33 @@
 .statistic-info {
   width: 100%;
-  height: 80%;
   display: flex;
   flex-direction: column;
-  padding-top: 2vw;
+  justify-content: space-between;
+  height: 38vh;
+  padding-top: 0.5vw;
 
   .country-info-flag {
     border: 1px solid rgba(0, 0, 0, 0.233);
     height: 8.25vw;
     width: 14vw;
-    margin-top: 4.5vw;
   }
 }
 
-.expand {
+.expand.expand.expand {
+  // sorry but it works :(:
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: white;
+  justify-content: center;
+
   .statistic-info {
-    justify-content: center;
+    padding-top: 5vw;
+    width: 100vw;
+    height: 70vh;
+    justify-content: space-between;
     align-items: center;
 
     * {
@@ -26,6 +38,31 @@
       border: 0.5px solid black;
       height: 20vw;
       width: 35vw;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .body-expand {
+    overflow: hidden;
+  }
+  .expand {
+    .statistic-info {
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+
+      * {
+        font-size: 2vw;
+      }
+
+      .country-info-flag {
+        border: 0.5px solid black;
+        height: 20vw;
+        width: 35vw;
+      }
     }
   }
 }
