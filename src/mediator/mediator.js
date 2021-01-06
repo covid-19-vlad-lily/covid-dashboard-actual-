@@ -8,7 +8,7 @@ import { LILY_GIT, VLAD_GIT, RS_LINK } from '../constants/footer.constants';
 import Table from '../components/table';
 import ChartStatistic from '../components/chart';
 import Statistic from '../components/statistic';
-import Map from '../components/map';
+// import Map from '../components/map';
 import RsLogo from '../assets/rsLogo.svg';
 
 class Mediator {

@@ -1,12 +1,10 @@
-import planet from '../../assets/planet.gif';
-
 export function getPickLabelDataFlag(someCountry, statistic) {
   let data = statistic.globalData;
 
   let pick = 'global';
   let label = `Global statistic`;
 
-  let flag = `<img class = 'country-info-flag' src = '${planet}'></img>`;
+  let flag = '';
   if (someCountry) {
     pick = 'country';
     label = someCountry.countryName;
@@ -17,7 +15,6 @@ export function getPickLabelDataFlag(someCountry, statistic) {
 }
 
 export function getCoefficient(measure, data) {
-  console.log(data);
   let coefficient = 1;
   if (measure !== 'absolute') {
     coefficient = 100000 / data.population;

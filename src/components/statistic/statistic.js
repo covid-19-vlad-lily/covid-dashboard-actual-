@@ -1,5 +1,5 @@
 import { getPickLabelDataFlag, getCoefficient, getTimeData } from './helpFunctions';
-
+import planetGif from '../../assets/planet.gif';
 class Statistic {
   constructor(globalData, worldDataForChart) {
     this.globalData = globalData;
@@ -14,6 +14,9 @@ class Statistic {
     const { time, timePrefics } = getTimeData(amountValue);
 
     const info = document.createElement('div');
+
+    const planet = `<img class = 'country-info-flag' src = '${planetGif}'></img>`;
+
     info.classList.add('statistic-info');
 
     info.innerHTML = `<div>Last data update: ${new Date(this.date[this.date.length - 1])}</div>
@@ -22,7 +25,7 @@ class Statistic {
       <p>Deaths: ${timePrefics} ${Math.trunc(coefficient * data[`${pick}Deaths${time}`])}</p>
       <p>Recovered: ${timePrefics} ${Math.trunc(
       coefficient * data[`${pick}Recovered${time}`]
-    )}</p></div>${flag}`;
+    )}</p></div>${flag || planet}`;
     return info;
   }
 }
