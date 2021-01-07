@@ -12,10 +12,10 @@ describe('helpFunctions', () => {
       population: 200000,
     };
 
-    it('should return coefficient without calculations', () => {
+    it('should always return 1 if the absolute measure passed', () => {
       expect(getCoefficient('absolute', data)).to.be.equal(1);
       expect(getCoefficient('absolute')).to.be.equal(1);
-      expect(getCoefficient('abso' + 'lute' + '', 'lalala')).to.be.equal(1);
+      expect(getCoefficient('absolute', 'lalala')).to.be.equal(1);
     });
 
     it('should return coefficient with calculations', () => {
@@ -27,7 +27,7 @@ describe('helpFunctions', () => {
       expect(getCoefficient(true, { population: Infinity })).to.be.equal(0);
     });
 
-    it('should throw an error', () => {
+    it('should throw an error whithout args', () => {
       expect(getCoefficient.bind(null, data)).to.throw(Error);
       expect(getCoefficient.bind(null, 'asd')).to.throw(Error);
       expect(getCoefficient.bind(null, 15, null)).to.throw(Error);
@@ -36,83 +36,63 @@ describe('helpFunctions', () => {
       expect(getCoefficient.bind(null, null, null, null)).to.throw(Error);
     });
   });
-});
 
-describe('helpFunctions', () => {
   describe('getTimeData', () => {
     const amountNew = getTimeData('new');
     const amountMew = getTimeData('mew');
     const withoutArgs = getTimeData();
 
-    it('should return object properties', () => {
+    it('returnable object should be with "time" and "timeRrefics" properties', () => {
       expect(typeof amountNew).to.be.equal('object');
-      expect(amountNew.time).to.be.equal('Today');
-      expect(amountNew.timePrefics).to.be.equal('+');
-      expect(amountNew.lol).to.be.equal(undefined);
-      expect(amountMew.time).to.be.equal('');
-      expect(amountMew.timePrefics).to.be.equal('');
-      expect(amountMew.lol).to.be.equal(undefined);
-      expect(withoutArgs.time).to.be.equal('');
-      expect(withoutArgs.timePrefics).to.be.equal('');
-      expect(withoutArgs.lol).to.be.equal(undefined);
+      expect(amountNew).to.have.all.keys('time', 'timePrefics');
+      expect(amountMew).to.have.all.keys('time', 'timePrefics');
+      expect(withoutArgs).to.have.all.keys('time', 'timePrefics');
     });
   });
-});
 
-describe('helpFunctions', () => {
   describe('getPickLabelDataFlag', () => {
     const someCountry = {
       countryName: 'Belarus',
       countryFlag: 'white-red-white',
     };
+
     const statistic = {
       globalData: 'World',
     };
+
     const emptyObj = {};
 
-    const Belarus = getPickLabelDataFlag(someCountry, statistic);
-    const World = getPickLabelDataFlag(null, statistic);
-    const emptyObjArgs = getPickLabelDataFlag(emptyObj, emptyObj);
+    let Belarus = null;
+    let World = null;
+    let emptyObjArgs = null;
 
-    it('should return Belarus data', () => {
+    beforeEach(() => {
+      Belarus = getPickLabelDataFlag(someCountry, statistic);
+      World = getPickLabelDataFlag(null, statistic);
+      emptyObjArgs = getPickLabelDataFlag(emptyObj, emptyObj);
+    });
+
+    it('returnable country data should be with "pick", "label", "data" and "flag" properties', () => {
       expect(typeof Belarus).to.be.equal('object');
-      expect(Belarus.lol).to.be.equal(undefined);
-      expect(Belarus.pick).to.be.equal('country');
-      expect(Belarus.label).to.be.equal('Belarus');
-      expect(Belarus.data).to.be.equal(someCountry);
-      expect(Belarus.flag).to.be.equal(
-        `<img class = 'country-info-flag' src = 'white-red-white'></img>`
-      );
+      expect(Belarus).to.have.all.keys('pick', 'label', 'data', 'flag');
     });
 
-    it('should return World data', () => {
+    it('returnable world data should be with "pick", "label", "data" and "flag" properties', () => {
       expect(typeof World).to.be.equal('object');
-      expect(World.lol).to.be.equal(undefined);
-      expect(World.pick).to.be.equal('global');
-      expect(World.label).to.be.equal('Global statistic');
-      expect(World.data).to.be.equal(statistic.globalData);
-      expect(World.flag).to.be.equal('');
+      expect(World).to.have.all.keys('pick', 'label', 'data', 'flag');
     });
 
-    it('should return incorrect data', () => {
+    it('should return incorrect data with "pick", "label", "data" and "flag" properties', () => {
       expect(typeof emptyObjArgs).to.be.equal('object');
-      expect(emptyObjArgs.lol).to.be.equal(undefined);
-      expect(emptyObjArgs.pick).to.be.equal('country');
-      expect(emptyObjArgs.label).to.be.equal(undefined);
-      expect(emptyObjArgs.data).to.be.equal(emptyObj);
-      expect(emptyObjArgs.flag).to.be.equal(
-        "<img class = 'country-info-flag' src = 'undefined'></img>"
-      );
+      expect(emptyObjArgs).to.have.all.keys('pick', 'label', 'data', 'flag');
     });
 
-    it('should throw an error whithout args', () => {
+    it('should throw an error without args', () => {
       expect(getPickLabelDataFlag.bind(null, null, null)).to.throw(Error);
       expect(getPickLabelDataFlag.bind(null, someCountry, null)).to.throw(Error);
     });
   });
-});
 
-describe('helpFunctions', () => {
   describe('getFilters', () => {
     it('should return "cases"', () => {
       expect(getFilters('Confirmed')).to.be.equal('cases');
@@ -127,7 +107,7 @@ describe('helpFunctions', () => {
       expect(getFilters('15')).to.be.equal('15');
     });
 
-    it('should throw an error', () => {
+    it('should throw an error because of incorrect args', () => {
       expect(getFilters.bind(null, 15)).to.throw(Error);
       expect(getFilters.bind(null, false)).to.throw(Error);
       expect(getFilters.bind(null, {})).to.throw(Error);
@@ -135,9 +115,7 @@ describe('helpFunctions', () => {
       expect(getFilters.bind(null, undefined)).to.throw(Error);
     });
   });
-});
 
-describe('helpFunctions', () => {
   describe('changeChartConfig', () => {
     const countryDataForChart = {
       timeline: { cases: {}, deaths: {}, recovered: {} },
@@ -145,23 +123,22 @@ describe('helpFunctions', () => {
     };
     const worldDataForChart = { cases: {}, deaths: {}, recovered: {} };
 
-    const worldData = changeChartConfig(worldDataForChart, null, 'cases', 'world');
-    const countryData = changeChartConfig(worldDataForChart, countryDataForChart, 'deaths', 'mew');
+    let worldData = null;
+    let countryData = null;
 
-    it('should return World data', () => {
-      expect(typeof worldData).to.be.equal('object');
-      expect(worldData.lol).to.be.equal(undefined);
-      expect(worldData.chartLabel).to.be.equal('Global statistic');
-      expect(worldData.commonData).to.be.equal(worldDataForChart.cases);
-      expect(worldData.color).to.be.equal('#296d15be');
+    beforeEach(() => {
+      worldData = changeChartConfig(worldDataForChart, null, 'cases', 'world');
+      countryData = changeChartConfig(worldDataForChart, countryDataForChart, 'deaths', 'mew');
     });
 
-    it('should return Country data', () => {
+    it('should return World data with "chartLabel", "commonData" and "color" properties', () => {
+      expect(typeof worldData).to.be.equal('object');
+      expect(worldData).to.have.all.keys('chartLabel', 'commonData', 'color');
+    });
+
+    it('should return Country data with "chartLabel", "commonData" and "color" properties', () => {
       expect(typeof countryData).to.be.equal('object');
-      expect(countryData.lol).to.be.equal(undefined);
-      expect(countryData.chartLabel).to.be.equal('Belarus statistic');
-      expect(countryData.commonData).to.be.equal(countryDataForChart.timeline.deaths);
-      expect(countryData.color).to.be.equal('red');
+      expect(countryData).to.have.all.keys('chartLabel', 'commonData', 'color');
     });
 
     it('should throw an error whithout args', () => {
