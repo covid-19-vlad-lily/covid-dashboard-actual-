@@ -110,13 +110,12 @@ class Mediator {
 
     rsLink.appendChild(rsLogo);
     vladGitLink.href = LILY_GIT;
-    vladGitLink.textContent = 'VladislavLuksha';
     lilyGitLink.href = VLAD_GIT;
     lilyGitLink.textContent = 'lilianna040';
     year.textContent = '2020';
     rsLink.href = RS_LINK;
 
-    footerInfo.append(vladGitLink, lilyGitLink, year, rsLink);
+    footerInfo.append(lilyGitLink, year, rsLink);
     footer.append(footerInfo);
 
     // ну наканецта

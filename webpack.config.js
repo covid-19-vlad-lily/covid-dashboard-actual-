@@ -1,37 +1,42 @@
-const path = require('path');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ESLintWebpackPlugin = require('eslint-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 
-module.exports = {
-  mode: 'development',
-  entry: {
-    index: path.join(__dirname, './src/index.js'),
-    chart: path.join(__dirname, './src/components/chart/chartStatistic.js'),
-  },
-  target: 'web',
-  devtool: 'source-map',
-  resolve: {
-    extensions: ['.js'],
-    alias: {},
-  },
+const config = {
+  entry: path.join(__dirname, 'src', 'index.js'),
   output: {
-    path: path.join(__dirname, './dist'),
-    filename: '[name].bundle.js',
-    publicPath: './',
+    path: path.resolve(__dirname, 'build'),
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
-        use: 'babel-loader',
-        exclude: [/node_modules/],
+        test: /\.?js$/,
+        include: path.resolve(__dirname, 'src'),
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  targets: {
+                    esmodules: true,
+                  },
+                },
+              ],
+            ],
+          },
+        },
       },
-      { test: /\.(sc|sa|c)ss$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'] },
+      {
+        test: /\.(sc|sa|c)ss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+      },
       {
         test: /\.(svg|png|gif)$/,
-        // test: /\.(png|svg|gif)$/i,
         use: [
           {
             loader: 'file-loader',
@@ -42,23 +47,30 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.geojson/,
-        loader: 'json-loader',
-      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, './src/index.html'),
+      template: path.join(__dirname, 'src', 'index.html'),
+    }),
+    new ESLintWebpackPlugin({
+      extensions: ['js'],
+      emitError: true,
+      failOnError: true,
+      emitWarning: true,
+      failOnWarning: false,
     }),
     new MiniCssExtractPlugin({ filename: 'index.css' }),
-    new CopyPlugin({
-      patterns: [{ from: './src/assets/favicon.svg', to: './' }],
-    }),
   ],
   devServer: {
-    contentBase: './src/public',
-    port: 3002,
+    contentBase: path.join(__dirname, 'public'),
+    open: true,
+    port: 9000,
+    hot: true,
   },
-};
+}
+
+module.exports = () => {
+  config.devtool = 'cheap-module-source-map'
+  return config
+}
