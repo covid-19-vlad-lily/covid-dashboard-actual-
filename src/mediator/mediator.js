@@ -131,14 +131,17 @@ class Mediator {
 
     document.body.addEventListener('click', (event) => {
       if (event.target.classList.contains('expand-btn')) {
-        event.target.closest('.wrapper-expand').classList.toggle('expand');
-        if (!document.body.classList.contains('body-expand')) {
-          this.oldY = window.scrollY;
-          window.scrollTo(0, 0);
-        } else {
-          window.scrollTo(0, this.oldY || 0);
-        }
-        document.body.classList.toggle('body-expand');
+        // event.target.closest('.wrapper-expand').classList.toggle('expand');
+        // if (!document.body.classList.contains('body-expand')) {
+        //   this.oldY = window.scrollY;
+        //   window.scrollTo(0, 0);
+        // } else {
+        //   window.scrollTo(0, this.oldY || 0);
+        // }
+        // document.body.classList.toggle('body-expand');
+
+        event.target.closest('.wrapper-expand').style.background = 'white'; // попробуй закомментировать эту линию
+        event.target.closest('.wrapper-expand').requestFullscreen();
       }
     });
   }
